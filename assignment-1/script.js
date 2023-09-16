@@ -41,7 +41,7 @@ function getLocalStorageData() {
             <td>${book.name}</td>
             <td>${book.author}</td>
             <td>${book.topic}</td>
-            <td class="delete" onclick="remove_book(this.parentNode.id)">
+            <td class="delete" onclick="openDeleteModel(${book.id}, '${book.name}')">
                   Delete
                 </td>
             `
@@ -75,7 +75,7 @@ newBookForm.addEventListener("submit", e => {
     <td>${elements.name.value}</td>
     <td>${elements.author.value}</td>
     <td>${topicText}</td>
-    <td class="delete" onclick="remove_book()">
+    <td class="delete" onclick="openDeleteModel(${maxId + 1}, '${elements.name.value}')">
                   Delete
                 </td>
     `
@@ -122,16 +122,50 @@ var addBookOpenModel = document.getElementById("add_book_open");
 var addBookModal = document.getElementById("add_book_popup_box");
 var addBookCloseModel = document.getElementById("add_book_close");
 
-addBookOpenModel.onclick = function(){
+addBookOpenModel.onclick = function () {
     addBookModal.style.display = "block";
 }
 
-addBookCloseModel.onclick = function() {
+addBookCloseModel.onclick = function () {
     addBookModal.style.display = "none";
 }
 
-window.onclick = function(event) {
-    if (event.target == addBookModal) {
+
+let deleteId = 0;
+let deleteName = "";
+let deleteModel = document.getElementById("delete_book_popup_box");
+let deleteModelClose = document.getElementById("delete_book_close");
+
+function openDeleteModel(id, name) {
+    deleteId = id
+    let bookNameHTML = document.getElementById("delete-name");
+    bookNameHTML.innerHTML = name
+    deleteModel.style.display = "block"
+}
+
+function confirmDelete() {
+    let books = JSON.parse(localStorage.getItem("book"));
+    const index = books.findIndex(book => book.id === Number(id));
+    console.log(id);
+    if (index !== -1) {
+        books.splice(index, 1);
+        localStorage.setItem("book", JSON.stringify(books));
+        document.getElementById(id).remove();
+        deleteModel.style.display = "none"
+    }
+}
+
+function cancelDelete() {
+    deleteModel.style.display = "none";
+}
+
+deleteModelClose.onclick = function() {
+    deleteModel.style.display = "none";
+}
+
+window.onclick = function (event) {
+    if (event.target == addBookModal || event.target == deleteModel) {
         addBookModal.style.display = "none";
+        deleteModel.style.display = "none";
     }
 };
