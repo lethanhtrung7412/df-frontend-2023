@@ -1,0 +1,19 @@
+.search {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+}
+
+.search-input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 2px solid rgb(183, 183, 183);
+}
+
+.button {
+    padding: 10px;
+    background-color: rgb(205, 79, 79);
+    color: white;
+    margin-left: 10px;
+    border-radius: 5px;
+}

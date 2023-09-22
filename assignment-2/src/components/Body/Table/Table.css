@@ -1,0 +1,23 @@
+table {
+    border: 1px solid rgb(181, 181, 181);
+    border-collapse: collapse
+}
+
+th,
+td {
+    border: 1px solid rgb(181, 181, 181);
+    border-collapse: collapse;
+    text-align: left;
+    padding: 10px;
+}
+
+.book-list {
+    background-color: white;
+    margin: 30px 0px;
+}
+
+.delete {
+    text-decoration: underline;
+    color: rgb(205, 79, 79);
+    cursor: pointer;
+}
