@@ -1,13 +1,94 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState } from 'react'
 import "./Search.css"
-export default function Search() {
-    const [value, setValue] = useState("")
+import useAddBook from '../../../hooks/useAddBook';
+import Table from '../Table/Table';
 
+export default function Search({ books, setBooks, removeBook }) {
+  const [searchValue, setSearchValue] = useState("")
+  const [name, setName] = useState("");
+  const [author, setAuthor] = useState("");
+  const [topic, setTopic] = useState("Programming");
+  const { addBookIsOpen, addBookOpenPopup, addBookClosePopup } = useAddBook();
+
+  const filteredBooks = books.filter(book =>
+    book.name.toLowerCase().includes(searchValue.toLowerCase())
+  );
+  console.log(filteredBooks);
+  function handleSubmit(e) {
+    const maxId = Math.max(...books.map(book => book.id));
+    const newBook = {
+      id: maxId + 1,
+      name,
+      author,
+      topic
+    };
+    const updatedBooks = [...books, newBook];
+    setBooks(updatedBooks);
+    setName("");
+    setTopic("Programming")
+    setAuthor("");
+    addBookClosePopup();
+  }
 
   return (
-    <div class="search">
-      <button class="button" id="add_book_open">Add book</button>
-      <input type="text" placeholder="Search book" size="30" class="search-input" id="search" />
-    </div>
+    <>
+      <div className="search">
+        <button className="button" onClick={addBookOpenPopup}>Add book</button>
+        {addBookIsOpen && <div id="add_book_popup_box">
+          <div className="modal-content">
+            <div className="modal-header">
+              <span onClick={addBookClosePopup} className='close'>×</span>
+
+              <h2>Add book</h2>
+            </div>
+
+            <div className="modal-body">
+              <form className="form-inline" id="new_book_submit" onSubmit={handleSubmit}>
+                <label htmlFor="name">Name</label>
+                <input
+                  name="name"
+                  value={name}
+                  onChange={e => setName(e.target.value)}
+                  type="text"
+                  placeholder="Search book"
+                  size="47"
+                  className="search-input"
+                  required />
+                <label htmlFor="author">Author</label>
+                <input
+                  name="author"
+                  value={author}
+                  onChange={e => setAuthor(e.target.value)}
+                  type="text"
+                  placeholder="Search book"
+                  size="47"
+                  className="search-input"
+                  required />
+                <label htmlFor="topic">Topic</label>
+                <select
+                  name="topic" value={topic}
+                  onChange={e => setTopic(e.target.value)}
+                  className="topic">
+                  <option value="Programming" selected>Programing</option>
+                  <option value="Self-Help">Self-Help</option>
+                  <option value="Devops">Devops</option>
+                </select>
+                <input type="submit" className="button submit" value="Create" />
+              </form>
+            </div>
+          </div>
+
+        </div>}
+        <input
+          type="text"
+          placeholder="Search book"
+          size="30"
+          className="search-input"
+          id="search"
+          value={searchValue}
+          onChange={e => setSearchValue(e.target.value)} />
+      </div>
+      <Table books={filteredBooks} removeBook={removeBook} /></>
+
   )
 }
