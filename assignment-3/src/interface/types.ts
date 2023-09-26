@@ -1,1 +1,1 @@
-export type SetValue<T> = T | ((prevState: T) => T)
+export type SetValue<T> = T | ((prevState: T) => T);

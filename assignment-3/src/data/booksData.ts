@@ -1,4 +1,4 @@
-import { Book } from '../interface/book'
+import { Book } from '../interface/book';
 
 export const booksData: Book[] = [
   {
@@ -55,4 +55,4 @@ export const booksData: Book[] = [
     author: 'Gene Kim',
     topic: 'Devops',
   },
-]
+];

@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
-import { Book } from '../../../interface/book'
-import './Table.css'
+import { useEffect, useState } from 'react';
+import { Book } from '../../../interface/book';
+import './Table.css';
 
 interface Props {
   books: Book[]
@@ -30,7 +30,9 @@ function ConfirmDeleteModal({
         <div className="delete_modal-body">
           <p>
             Are you sure you want to delete
-            {bookName} item?
+            {bookName}
+            {' '}
+            item?
           </p>
           <button onClick={onConfirm} className="button confirm">
             Yes
@@ -41,43 +43,43 @@ function ConfirmDeleteModal({
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default function Table({ books, removeBook }: Props) {
-  const [showDeleteModal, setShowDeleteModal] = useState(false)
-  const [bookToDelete, setBookToDelete] = useState<Book | null>(null)
-  const [currentPage, setCurrentPage] = useState(1)
-  const [booksPerPage] = useState(3)
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [bookToDelete, setBookToDelete] = useState<Book | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [booksPerPage] = useState(3);
 
   useEffect(() => {
-    setCurrentPage(1)
-  }, [books])
+    setCurrentPage(1);
+  }, [books]);
 
   const openDeleteModal = (book: Book) => {
-    setBookToDelete(book)
-    setShowDeleteModal(true)
-  }
+    setBookToDelete(book);
+    setShowDeleteModal(true);
+  };
 
   const closeDeleteModal = () => {
-    setShowDeleteModal(false)
-  }
+    setShowDeleteModal(false);
+  };
 
   const handleDeleteBook = () => {
-    deleteBook(bookToDelete!.id)
-    closeDeleteModal()
-  }
+    deleteBook(bookToDelete!.id);
+    closeDeleteModal();
+  };
 
   const deleteBook = (id: number) => {
-    removeBook(id)
-  }
-  const indexOfLastBook = currentPage * booksPerPage
-  const indexOfFirstBook = indexOfLastBook - booksPerPage
-  const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook)
+    removeBook(id);
+  };
+  const indexOfLastBook = currentPage * booksPerPage;
+  const indexOfFirstBook = indexOfLastBook - booksPerPage;
+  const currentBooks = books.slice(indexOfFirstBook, indexOfLastBook);
 
-  const pageNumbers: any = []
+  const pageNumbers: any = [];
   for (let i = 1; i <= Math.ceil(books.length / booksPerPage); i++) {
-    pageNumbers.push(i)
+    pageNumbers.push(i);
   }
   const renderPageNumbers = pageNumbers.map((number: any) => (
     <li
@@ -89,7 +91,7 @@ export default function Table({ books, removeBook }: Props) {
     >
       {number}
     </li>
-  ))
+  ));
 
   return (
     <div className="book-list">
@@ -124,5 +126,5 @@ export default function Table({ books, removeBook }: Props) {
         />
       )}
     </div>
-  )
+  );
 }

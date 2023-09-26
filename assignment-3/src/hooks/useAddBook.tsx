@@ -1,15 +1,15 @@
-import { useState } from 'react'
+import { useState } from 'react';
 
 export default function useAddBook() {
-  const [addBookIsOpen, setAddBookIsOpen] = useState(false)
+  const [addBookIsOpen, setAddBookIsOpen] = useState(false);
 
   function addBookOpenPopup() {
-    setAddBookIsOpen(true)
+    setAddBookIsOpen(true);
   }
 
   function addBookClosePopup() {
-    setAddBookIsOpen(false)
+    setAddBookIsOpen(false);
   }
 
-  return { addBookIsOpen, addBookOpenPopup, addBookClosePopup }
+  return { addBookIsOpen, addBookOpenPopup, addBookClosePopup };
 }

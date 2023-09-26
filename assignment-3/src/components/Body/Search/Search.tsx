@@ -1,9 +1,9 @@
-import React, { useState } from 'react'
-import './Search.css'
-import useAddBook from '../../../hooks/useAddBook'
-import Table from '../Table/Table'
-import { Book } from '../../../interface/book'
-import { SetValue } from '../../../interface/types'
+import React, { useState } from 'react';
+import './Search.css';
+import useAddBook from '../../../hooks/useAddBook';
+import Table from '../Table/Table';
+import { Book } from '../../../interface/book';
+import { SetValue } from '../../../interface/types';
 
 interface Props {
   books: Book[]
@@ -12,36 +12,36 @@ interface Props {
 }
 
 export default function Search({ books, setBooks, removeBook }: Props) {
-  const [searchValue, setSearchValue] = useState('')
-  const [name, setName] = useState('')
-  const [author, setAuthor] = useState('')
-  const [topic, setTopic] = useState('Programming')
+  const [searchValue, setSearchValue] = useState('');
+  const [name, setName] = useState('');
+  const [author, setAuthor] = useState('');
+  const [topic, setTopic] = useState('Programming');
 
-  const { addBookIsOpen, addBookOpenPopup, addBookClosePopup } = useAddBook()
+  const { addBookIsOpen, addBookOpenPopup, addBookClosePopup } = useAddBook();
 
   const filteredBooks = books.filter((book) =>
     book.name.toLowerCase().includes(searchValue.toLowerCase()),
-  )
+  );
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
+    e.preventDefault();
 
-    const maxId = Math.max(...books.map((book) => book.id))
+    const maxId = Math.max(...books.map((book) => book.id));
     const newBook: Book = {
       id: maxId + 1,
       name,
       author,
       topic,
-    }
+    };
 
-    const updatedBooks = [...books, newBook]
-    setBooks(updatedBooks)
+    const updatedBooks = [...books, newBook];
+    setBooks(updatedBooks);
 
-    setName('')
-    setTopic('Programming')
-    setAuthor('')
+    setName('');
+    setTopic('Programming');
+    setAuthor('');
 
-    addBookClosePopup()
+    addBookClosePopup();
   }
 
   return (
@@ -138,5 +138,5 @@ export default function Search({ books, setBooks, removeBook }: Props) {
 
       <Table books={filteredBooks} removeBook={removeBook} />
     </>
-  )
+  );
 }
