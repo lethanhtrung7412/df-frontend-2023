@@ -17,7 +17,7 @@
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
     "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx}\"",
     "preinstall": "npx only-allow pnpm",
-    "prepare": "husky install"
+    "prepare": "cd .. && husky install assignment-3/.husky"
   },
   "eslintConfig": {
     "extends": [
@@ -64,6 +64,12 @@
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  
   "lint-staged": {
     "*.{css,html,json,tsx,ts}": [
       "prettier --write ."
