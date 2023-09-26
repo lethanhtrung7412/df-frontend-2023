@@ -66,8 +66,8 @@
   },
   "lint-staged": {
     "*.{css,html,json,tsx,ts}": [
-      "prettier --write ."
+      "pnpm format"
     ],
-    "*.{tsx,ts}": "eslint --fix"
+    "*.{tsx,ts}": "pnpm lint"
   }
 }
