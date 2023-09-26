@@ -60,7 +60,7 @@
     "eslint-plugin-react": "7.x",
     "eslint-plugin-react-hooks": "4.x",
     "eslint-plugin-testing-library": "3.x",
-    "husky": "^8.0.0",
+    "husky": "^8.0.3",
     "lint-staged": "^14.0.1",
     "prettier": "^3.0.3"
   },
@@ -68,7 +68,7 @@
     "hooks": {
       "pre-commit": "pnpm run lint-staged"
     },
-    "gitDir": "../.git" 
+    "gitDir": "../.git"
   },
   "lint-staged": {
     "*.{css,html,json,tsx,ts}": [
