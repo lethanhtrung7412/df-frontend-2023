@@ -78,8 +78,8 @@ export default function Table({ books, remove }: Props) {
                       tabIndex={0}
                     >
                       <Link href={`/book/${book.id}`}>Detail </Link>
-                    </div>
-                    |
+                    </div>{' '}
+                    |{' '}
                     <div
                       role="button"
                       className="underline cursor-pointer"
