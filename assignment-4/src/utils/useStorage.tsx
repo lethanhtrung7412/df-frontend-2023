@@ -4,12 +4,7 @@ import Book from '../types/books'
 export default function useStorage<T extends Book>(
   key: string,
   initialValue: T[],
-): [
-  T[],
-  React.Dispatch<React.SetStateAction<T[]>>,
-  (newValue: T) => void,
-  (id: number) => void,
-] {
+): [T[], (newValue: T) => void, (id: number) => void] {
   const [value, setValue] = useState<T[]>([])
   useEffect(() => {
     const storedData =
@@ -33,5 +28,5 @@ export default function useStorage<T extends Book>(
     setValue(updated)
     window.localStorage.setItem(key, JSON.stringify(updated))
   }
-  return [value, setValue, addToLocalStorage, deleteFromLocalStorage]
+  return [value, addToLocalStorage, deleteFromLocalStorage]
 }

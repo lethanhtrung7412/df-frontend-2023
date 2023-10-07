@@ -15,8 +15,12 @@ const BookDetail = () => {
   const router = useRouter()
   const [deleteBookModalState, setDeleteBookModalState] =
     useState<boolean>(false)
-  // @typescript-eslint/no-unused-vars
-  const [books, setBooks, add, remove] = useStorage<Book>('books', booksData)
+  const [
+    books,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    _add,
+    remove,
+  ] = useStorage<Book>('books', booksData)
   const detailBook: Book = books?.filter(
     (book) => book.id === Number(params.id),
   )[0]
@@ -68,8 +72,7 @@ const BookDetail = () => {
         <DeleteBookModal
           book={detailBook}
           setDeleteModalState={setDeleteBookModalState}
-          // react/jsx-no-bind
-          confirm={deleteBook}
+          confirm={deleteBook} // eslint-disable-line
         />
       )}
     </>

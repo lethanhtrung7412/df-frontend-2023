@@ -45,6 +45,9 @@
   "lint-staged": {
     "*.{css,html,json,tsx,ts}": [
       "pnpm format"
+    ],
+    "*.{tsx,ts}": [
+      "pnpm lint --fix"
     ]
   }
 }

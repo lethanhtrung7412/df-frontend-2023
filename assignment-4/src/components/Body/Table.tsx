@@ -38,11 +38,12 @@ export default function Table({ books, remove }: Props) {
     pageNumbers.push(i as number)
   }
   const renderPageNumbers = pageNumbers.map((number) => (
+    // eslint-disable-next-line
     <li
-      role="button"
       key={number}
       className={currentPage === number ? 'bg-button text-white' : ''}
       onClick={() => setCurrentPage(number)}
+      onKeyDown={() => setCurrentPage(number)}
     >
       {number}
     </li>
@@ -71,17 +72,23 @@ export default function Table({ books, remove }: Props) {
                   <td>{book.author}</td>
                   <td>{book.topic}</td>
                   <td className="text-button">
-                    <span className="underline cursor-pointer" role="button">
+                    <div
+                      className="underline cursor-pointer"
+                      role="button"
+                      tabIndex={0}
+                    >
                       <Link href={`/book/${book.id}`}>Detail </Link>
-                    </span>
+                    </div>
                     |
-                    <span
+                    <div
                       role="button"
                       className="underline cursor-pointer"
                       onClick={() => openDeleteModal(book)}
+                      onKeyDown={() => openDeleteModal(book)}
+                      tabIndex={0}
                     >
                       Delete
-                    </span>
+                    </div>
                   </td>
                 </tr>
               ))}

@@ -13,7 +13,7 @@ export default function Home() {
   const [searchValue, setSearchValue] = useState<string>('')
   const [addBookModalState, setAddBookModalState] = useState<boolean>(false)
   // @typescript-eslint/no-unused-vars
-  const [books, setBooks, add, remove] = useStorage<Book>('books', booksData)
+  const [books, add, remove] = useStorage<Book>('books', booksData)
   const filteredBooks = books?.filter((book) =>
     book.name.toLowerCase().includes(searchValue.toLowerCase()),
   )
@@ -25,13 +25,16 @@ export default function Home() {
         setSearchValue={setSearchValue}
         setAddBookModalState={setAddBookModalState}
       />
-      <Table books={filteredBooks} remove={remove} />
+      <Table
+        books={filteredBooks}
+        remove={remove} // eslint-disable-line
+      />
       <div>
         {addBookModalState && (
           <AddBookModal
             setModalState={setAddBookModalState}
             books={filteredBooks}
-            addBook={add}
+            addBook={add} // eslint-disable-line
           />
         )}
       </div>
